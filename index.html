@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abishek N — DevOps & Cloud Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Sora:wght@600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:        #0d1117;
+  --bg2:       #111820;
+  --surface:   #161d28;
+  --surface2:  #1c2635;
+  --border:    #243040;
+  --border2:   #2d3d52;
+  --blue:      #3b82f6;
+  --blue-dk:   #2563eb;
+  --blue-lt:   #60a5fa;
+  --blue-pale: rgba(59,130,246,0.10);
+  --blue-mid:  rgba(59,130,246,0.25);
+  --txt:       #94a3b8;
+  --txtd:      #64748b;
+  --txtb:      #e2eaf6;
+  --white:     #f8fafc;
+  --green:     #22c55e;
+  --shadow:    0 2px 8px rgba(0,0,0,.4);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.5);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(13,17,23,0.93);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+  height:60px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 3rem;
+}
+.nav-logo{
+  font-family:'Sora',sans-serif;font-weight:800;font-size:.95rem;
+  color:var(--txtb);text-decoration:none;letter-spacing:-.02em;white-space:nowrap;
+}
+.nav-logo span{color:var(--blue)}
+.nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center}
+.nav-links a{color:var(--txtd);text-decoration:none;font-size:.78rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--blue-lt)}
+.nav-cta{color:var(--txtd);font-size:.78rem;font-weight:500;text-decoration:none;transition:color .2s}
+.nav-cta:hover{color:var(--blue-lt)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.nav-toggle span{width:22px;height:2px;background:var(--txtb);border-radius:2px}
+@media(max-width:768px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none;flex-direction:column;position:absolute;top:60px;left:0;right:0;
+    background:var(--bg2);border-bottom:1px solid var(--border);
+    padding:1.5rem 2rem;gap:1.2rem;box-shadow:var(--shadow-lg)}
+  .nav-links.open{display:flex}
+  .nav-toggle{display:flex}
+}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:100px 3rem 5rem;position:relative;overflow:hidden;
+}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
+.orb1{width:500px;height:500px;background:rgba(59,130,246,0.12);top:-100px;right:-80px}
+.orb2{width:300px;height:300px;background:rgba(59,130,246,0.07);bottom:-60px;left:10%}
+.hero-inner{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1fr auto;gap:3rem;
+  align-items:start;width:100%;max-width:1200px;margin:0 auto;
+  padding-top:2rem;
+}
+@media(max-width:960px){.hero-inner{grid-template-columns:1fr}.hero-card-col{display:none}}
+.hero-avail{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);
+  color:#4ade80;font-size:.7rem;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;padding:.28rem .9rem;border-radius:20px;
+  margin-bottom:1.4rem;animation:fadeUp .5s ease both;
+}
+.avail-dot{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite}
+.hero-name{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(3rem,5.5vw,5rem);
+  font-weight:800;color:var(--white);
+  line-height:1.0;letter-spacing:-.04em;
+  margin-bottom:.55rem;
+  animation:fadeUp .5s .08s ease both;
+}
+.hero-title{
+  font-family:'DM Sans',sans-serif;font-size:clamp(1rem,2vw,1.25rem);
+  font-weight:600;color:var(--blue-lt);
+  margin-bottom:1.3rem;
+  animation:fadeUp .5s .16s ease both;
+  letter-spacing:-.01em;
+}
+.hero-desc{
+  max-width:500px;color:var(--txt);font-size:.9rem;
+  margin-bottom:2rem;animation:fadeUp .5s .24s ease both;line-height:1.85;
+}
+.hero-btns{display:flex;gap:.9rem;flex-wrap:wrap;animation:fadeUp .5s .32s ease both}
+.hero-kpis{
+  display:flex;gap:0;margin-top:1.8rem;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;animation:fadeUp .5s .38s ease both;
+}
+.hkpi{flex:1;padding:.9rem .7rem;text-align:center;border-right:1px solid var(--border)}
+.hkpi:last-child{border-right:none}
+.hkpi-n{font-family:'Sora',sans-serif;font-size:1.3rem;font-weight:800;color:var(--blue-lt);line-height:1}
+.hkpi-l{font-size:.62rem;color:var(--txtd);margin-top:.25rem;text-transform:uppercase;letter-spacing:.06em}
+.hero-skills{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.9rem;animation:fadeUp .5s .22s ease both}
+.hsk{font-size:.72rem;font-weight:600;background:var(--surface2);border:1px solid var(--border2);color:var(--txt);padding:.28rem .72rem;border-radius:6px}
+.hero-certs{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:1.6rem;animation:fadeUp .5s .28s ease both}
+.hero-cert-badge{
+  display:inline-flex;align-items:center;gap:.45rem;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;padding:.35rem .75rem;transition:.2s;
+}
+.hero-cert-badge:hover{border-color:var(--blue);background:var(--blue-pale)}
+.hero-cert-badge img{width:22px;height:22px;object-fit:contain;border-radius:3px;flex-shrink:0}
+.hero-cert-badge span{font-size:.75rem;font-weight:700;color:var(--txtb)}
+.btn-blue{
+  background:var(--blue);color:#fff;padding:.65rem 1.5rem;
+  border-radius:8px;font-weight:600;font-size:.85rem;text-decoration:none;
+  transition:all .2s;display:inline-flex;align-items:center;gap:.4rem;
+  border:2px solid var(--blue);
+}
+.btn-blue:hover{background:var(--blue-dk);border-color:var(--blue-dk);transform:translateY(-2px);box-shadow:0 6px 20px rgba(59,130,246,.35)}
+.btn-outline{
+  background:transparent;color:var(--blue-lt);padding:.65rem 1.5rem;
+  border-radius:8px;font-weight:600;font-size:.85rem;text-decoration:none;
+  transition:all .2s;display:inline-flex;align-items:center;gap:.4rem;
+  border:2px solid var(--border2);
+}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-pale);transform:translateY(-2px)}
+.hero-contact-row{display:flex;flex-wrap:wrap;gap:.5rem .9rem;margin-top:1.6rem;margin-bottom:1.2rem}
+.hero-link{font-size:.78rem;color:var(--txtd);text-decoration:none;font-weight:500;transition:color .2s}
+.hero-link:hover{color:var(--blue-lt)}
+.hero-pills{display:flex;flex-wrap:wrap;gap:.4rem}
+.hpill{font-size:.72rem;font-weight:600;background:var(--surface);border:1px solid var(--border);color:var(--txt);padding:.28rem .75rem;border-radius:6px;transition:.2s}
+.hpill:hover{border-color:var(--blue);color:var(--blue-lt);background:var(--blue-pale)}
+.hero-stats{
+  display:flex;margin-top:2.5rem;animation:fadeUp .5s .4s ease both;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;overflow:hidden;
+}
+.hst{flex:1;padding:.9rem .8rem;text-align:center;border-right:1px solid var(--border)}
+.hst:last-child{border-right:none}
+.hst-n{font-family:'Sora',sans-serif;font-size:1.35rem;font-weight:800;color:var(--blue-lt);line-height:1}
+.hst-l{font-size:.65rem;color:var(--txtd);margin-top:.25rem;text-transform:uppercase;letter-spacing:.07em}
+/* profile card */
+.profile-card{
+  width:400px;background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;padding:2.2rem;box-shadow:var(--shadow-lg);
+  animation:fadeUp .6s .3s ease both;flex-shrink:0;
+}
+.pc-label{font-size:.68rem;font-weight:700;color:var(--txtd);text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem}
+.pc-row{display:flex;align-items:center;gap:.75rem;padding:.55rem 0;border-bottom:1px solid var(--border)}
+.pc-row:last-of-type{border-bottom:none}
+.pc-ico{width:32px;height:32px;background:var(--blue-pale);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.pc-lbl{font-size:.68rem;color:var(--txtd);line-height:1.2}
+.pc-val{font-size:.82rem;color:var(--txtb);font-weight:600;line-height:1.3}
+.stack-pills{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:1rem}
+.sp{font-family:'DM Mono',monospace;font-size:.68rem;background:var(--blue-pale);color:var(--blue-lt);border:1px solid var(--blue-mid);padding:.15rem .55rem;border-radius:4px}
+.cert-pill-row{display:flex;flex-direction:column;gap:.45rem}
+.pc-social{text-decoration:none;cursor:pointer;transition:.2s}
+.pc-social:hover{background:var(--surface2);border-radius:8px}
+.cert-pill{display:flex;align-items:center;gap:.55rem;padding:.4rem .6rem;background:var(--bg2);border:1px solid var(--border);border-radius:8px;transition:.2s;cursor:default}
+.cert-pill:hover{border-color:var(--blue);background:var(--blue-pale)}
+.cert-pill img{width:26px;height:26px;object-fit:contain;border-radius:4px;flex-shrink:0}
+.cert-pill span{font-size:.76rem;font-weight:600;color:var(--txtb)}
+.btn-solid{
+  background:var(--blue);color:#fff;padding:.65rem 1.5rem;border-radius:8px;
+  font-weight:700;font-size:.84rem;text-decoration:none;transition:all .2s;
+  display:inline-flex;align-items:center;gap:.4rem;border:2px solid var(--blue);
+}
+.btn-solid:hover{background:var(--blue-dk);border-color:var(--blue-dk);transform:translateY(-2px);box-shadow:0 6px 22px rgba(59,130,246,.35)}
+.btn-ghost{
+  background:transparent;color:var(--blue-lt);padding:.65rem 1.5rem;border-radius:8px;
+  font-weight:600;font-size:.84rem;text-decoration:none;transition:all .2s;
+  display:inline-flex;align-items:center;gap:.4rem;border:2px solid var(--border2);
+}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue-lt);background:var(--blue-pale);transform:translateY(-2px)}
+
+/* profile card styles removed */
+/* train-card as link */
+a.train-card{text-decoration:none;cursor:pointer}
+a.train-card:hover{border-color:var(--blue);box-shadow:0 0 20px rgba(59,130,246,.15);transform:translateY(-2px)}
+.train-section-lbl{font-size:.78rem;font-weight:700;letter-spacing:.06em;color:var(--txtd);margin-bottom:.9rem;display:block}
+.train-open{font-size:.7rem;color:var(--blue-lt);font-weight:700;margin-top:.4rem}
+.cert-open{font-size:.7rem;color:var(--blue-lt);font-weight:700;margin-top:.35rem}
+a.cert-card{cursor:pointer}
+a.cert-card:hover{border-color:var(--blue);box-shadow:0 0 24px rgba(59,130,246,.18);transform:translateY(-2px)}
+.train-ico img{width:100%;height:100%;object-fit:contain;padding:5px}
+
+
+/* ── SHARED ── */
+.section{padding:7rem 3rem;max-width:1200px;margin:0 auto}
+.divider{border:none;border-top:1px solid var(--border);max-width:1160px;margin:0 auto}
+.s-eye{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:.6rem}
+.s-title{font-family:'Sora',sans-serif;font-size:clamp(1.6rem,2.6vw,2.2rem);font-weight:800;color:var(--txtb);letter-spacing:-.03em;margin-bottom:3rem}
+.s-title span{color:var(--blue)}
+.sec-num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:var(--blue);color:#fff;border-radius:5px;font-size:.65rem;font-weight:800;vertical-align:middle;margin-right:.5rem;font-family:'Sora',sans-serif}
+@media(max-width:600px){.section{padding:4rem 1.4rem}}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:3fr 2fr;gap:3.5rem;align-items:start}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr}}
+.about-text p{color:var(--txt);font-size:.88rem;margin-bottom:1rem;line-height:1.88}
+.about-links{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
+.alink{display:inline-flex;align-items:center;gap:.35rem;font-size:.78rem;font-weight:600;color:var(--blue-lt);text-decoration:none;border:1px solid var(--border2);padding:.3rem .8rem;border-radius:6px;transition:.2s}
+.alink:hover{background:var(--blue-pale);border-color:var(--blue)}
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.1rem;transition:.2s}
+.kpi:hover{border-color:var(--blue);box-shadow:0 0 20px rgba(59,130,246,.12);transform:translateY(-2px)}
+.kpi-n{font-family:'Sora',sans-serif;font-size:1.75rem;font-weight:800;color:var(--blue-lt);line-height:1}
+.kpi-l{font-size:.71rem;color:var(--txtd);margin-top:.3rem}
+
+/* ── EXPERIENCE ── */
+.exp-company-block{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.exp-co-header{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;
+  padding:1.3rem 1.8rem;border-bottom:1px solid var(--border);background:var(--surface2);
+}
+.exp-co-left{display:flex;align-items:center;gap:.9rem}
+.exp-co-logo{width:42px;height:42px;background:var(--blue-pale);border:1px solid var(--blue-mid);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}
+.exp-co-name{font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:800;color:var(--txtb)}
+.exp-co-meta{font-size:.74rem;color:var(--txtd);margin-top:.15rem}
+.exp-co-badge{font-size:.7rem;font-weight:700;background:rgba(34,197,94,.1);color:#4ade80;border:1px solid rgba(34,197,94,.25);padding:.25rem .85rem;border-radius:20px;white-space:nowrap;flex-shrink:0}
+
+.exp-role-block{padding:1.6rem 1.8rem;border-bottom:1px solid var(--border)}
+.exp-role-block:last-child{border-bottom:none}
+.exp-role-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.8rem}
+/* ONE LINE: title + sub together */
+.exp-role-line{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.exp-role-name{font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:var(--blue-lt)}
+.exp-role-sep{color:var(--txtd);font-size:.9rem}
+.exp-role-sub{font-size:.82rem;color:var(--txtd)}
+.exp-date{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--blue-lt);background:var(--blue-pale);border:1px solid var(--blue-mid);padding:.18rem .7rem;border-radius:4px;white-space:nowrap;flex-shrink:0}
+.exp-bullets{list-style:none;margin-bottom:1rem}
+.exp-bullets li{font-size:.82rem;color:var(--txt);padding:.28rem 0;display:flex;gap:.65rem;line-height:1.65}
+.exp-bullets li::before{content:'→';color:var(--blue);font-weight:700;flex-shrink:0;margin-top:2px}
+.exp-tags{display:flex;flex-wrap:wrap;gap:.3rem}
+.exp-tag{font-size:.67rem;font-family:'DM Mono',monospace;background:var(--blue-pale);color:var(--blue-lt);border:1px solid var(--blue-mid);padding:.14rem .52rem;border-radius:4px}
+
+/* ── CERTIFICATIONS ── */
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.2rem}
+.cert-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;box-shadow:var(--shadow);display:flex;gap:1.1rem;align-items:center;transition:.22s}
+.cert-card:hover{border-color:var(--blue);box-shadow:0 0 28px rgba(59,130,246,.14);transform:translateY(-2px)}
+.cert-img{width:68px;height:68px;object-fit:contain;border-radius:8px;flex-shrink:0;background:transparent}
+.cert-name{font-weight:700;font-size:.86rem;color:var(--txtb);margin-bottom:.25rem;line-height:1.35}
+.cert-by{font-size:.73rem;color:var(--txtd)}
+.cert-ok{display:inline-flex;align-items:center;gap:.35rem;font-size:.67rem;font-weight:700;color:#4ade80;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);padding:.14rem .55rem;border-radius:10px;margin-top:.35rem}
+.cert-ok::before{content:'';width:5px;height:5px;background:#4ade80;border-radius:50%;display:inline-block}
+
+/* edu */
+.edu-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.4rem 1.7rem;display:flex;gap:1rem;align-items:center;max-width:540px;margin-top:1.2rem;transition:.2s}
+.edu-card:hover{border-color:var(--blue);box-shadow:0 0 18px rgba(59,130,246,.1)}
+.edu-ico{width:44px;height:44px;background:var(--blue-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.edu-deg{font-weight:700;font-size:.86rem;color:var(--txtb);margin-bottom:.2rem}
+.edu-inst{font-size:.76rem;color:var(--txtd)}
+.edu-yr{font-size:.7rem;color:var(--blue-lt);font-family:'DM Mono',monospace;margin-top:.25rem}
+
+/* ── SKILLS ── */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
+.skill-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.3rem;transition:.2s}
+.skill-card:hover{border-color:var(--blue);box-shadow:0 0 20px rgba(59,130,246,.1);transform:translateY(-2px)}
+.sc-head{display:flex;align-items:center;gap:.6rem;margin-bottom:.9rem}
+.sc-ico{width:30px;height:30px;border-radius:7px;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.sc-title{font-weight:700;font-size:.8rem;color:var(--txtb)}
+.chip-wrap{display:flex;flex-wrap:wrap;gap:.3rem}
+.chip{font-size:.7rem;background:var(--bg2);border:1px solid var(--border);color:var(--txt);padding:.18rem .55rem;border-radius:4px;transition:.15s}
+.chip:hover{background:var(--blue-pale);border-color:var(--blue-mid);color:var(--blue-lt)}
+
+/* ── PROJECTS ── */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1.2rem}
+.proj-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.6rem;box-shadow:var(--shadow);transition:.25s;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.proj-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),transparent);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.proj-card:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.proj-card:hover::after{transform:scaleX(1)}
+.proj-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.proj-ico{width:40px;height:40px;background:var(--blue-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.proj-gh{color:var(--txtd);font-size:.73rem;border:1px solid var(--border);padding:.18rem .6rem;border-radius:6px;text-decoration:none;transition:.2s;font-weight:500}
+.proj-gh:hover{color:var(--blue-lt);border-color:var(--blue);background:var(--blue-pale)}
+.proj-name{font-family:'Sora',sans-serif;font-size:.93rem;font-weight:700;color:var(--txtb);margin-bottom:.45rem}
+.proj-desc{font-size:.79rem;color:var(--txtd);margin-bottom:1rem;flex:1;line-height:1.8}
+.proj-stack{display:flex;flex-wrap:wrap;gap:.3rem}
+.proj-stack span{font-size:.67rem;background:rgba(245,158,11,.07);color:#fbbf24;border:1px solid rgba(245,158,11,.2);padding:.14rem .5rem;border-radius:4px;font-weight:500}
+
+/* ── TRAINING ── */
+.training-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+.train-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.3rem;display:flex;gap:1rem;align-items:flex-start;transition:.2s}
+.train-card:hover{border-color:var(--blue);box-shadow:0 0 18px rgba(59,130,246,.1);transform:translateY(-2px)}
+.train-ico{width:44px;height:44px;border-radius:9px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--surface2);border:1px solid var(--border)}
+.train-ico img{width:100%;height:100%;object-fit:contain}
+.train-name{font-size:.84rem;font-weight:700;color:var(--txtb);margin-bottom:.25rem;line-height:1.4}
+.train-plat{font-size:.73rem;color:var(--txtd)}
+.train-date{font-size:.68rem;color:var(--blue-lt);font-family:'DM Mono',monospace;margin-top:.3rem}
+.train-id{font-size:.63rem;color:var(--txtd);margin-top:.15rem;font-family:'DM Mono',monospace}
+
+/* ── CONTACT ── */
+#contact{text-align:center}
+.contact-box{display:inline-block;max-width:560px;width:100%;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:3rem;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.contact-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--blue-lt))}
+.contact-lead{font-family:'Sora',sans-serif;font-size:1.5rem;font-weight:800;color:var(--txtb);margin-bottom:.6rem;letter-spacing:-.03em}
+.contact-sub{color:var(--txtd);font-size:.86rem;margin-bottom:1.8rem}
+.contact-email{display:inline-flex;align-items:center;gap:.5rem;color:var(--blue-lt);font-weight:700;font-size:.88rem;text-decoration:none;margin-bottom:2rem;font-family:'DM Mono',monospace;padding:.6rem 1.2rem;background:var(--blue-pale);border-radius:8px;border:1px solid var(--blue-mid);transition:.2s}
+.contact-email:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.contact-links{display:flex;justify-content:center;gap:.7rem;flex-wrap:wrap}
+.cl{display:inline-flex;align-items:center;gap:.45rem;color:var(--txt);text-decoration:none;border:1.5px solid var(--border);padding:.52rem 1rem;border-radius:8px;font-size:.78rem;font-weight:600;transition:.2s}
+.cl:hover{color:var(--blue-lt);border-color:var(--blue);background:var(--blue-pale)}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:1.6rem 3rem;display:flex;justify-content:space-between;align-items:center;font-size:.76rem;color:var(--txtd);flex-wrap:wrap;gap:.5rem}
+footer b{color:var(--txtb)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.reveal{opacity:1;transform:none;transition:opacity .55s ease,transform .55s ease}
+.reveal.animate-hidden{opacity:0;transform:translateY(22px)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <button class="nav-toggle" onclick="document.getElementById('nm').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nm">
+    <li><a href="#about">About</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#training">Training</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section id="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-inner">
+
+    <!-- LEFT -->
+    <div>
+      <div class="hero-avail"><span class="avail-dot"></span>Open to Opportunities</div>
+      <h1 class="hero-name">Abishek&nbsp;N</h1>
+      <p class="hero-title">DevOps &amp; Cloud Engineer</p>
+      <p class="hero-desc">AWS-focused engineer with 3+ years at HCLTech building production-grade cloud infrastructure. I automate, optimize, and secure cloud-native environments at scale — cutting costs, boosting reliability, and shipping faster.</p>
+      <div class="hero-skills">
+        <span class="hsk">☁️ AWS</span>
+        <span class="hsk">🏗️ Terraform</span>
+        <span class="hsk">⎈ Kubernetes</span>
+        <span class="hsk">🐳 Docker</span>
+        <span class="hsk">⚙️ Jenkins</span>
+        <span class="hsk">🔄 GitHub Actions</span>
+      </div>
+      <div class="hero-certs">
+        <div class="hero-cert-badge">
+          <img src="https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png" alt="AWS SAA" onerror="this.style.display='none'"/>
+          <span>AWS Solutions Architect</span>
+        </div>
+        <div class="hero-cert-badge">
+          <img id="tf-logo-hero" alt="Terraform"/>
+          <span>Terraform Associate</span>
+        </div>
+        <div class="hero-cert-badge">
+          <img src="https://images.credly.com/size/340x340/images/8b8ed108-e77d-4396-ac59-2504583b9d54/cka_from_cncfsite__281_29.png" alt="CKA" onerror="this.style.display='none'"/>
+          <span>CKA</span>
+        </div>
+      </div>
+      <div class="hero-btns">
+        <a class="btn-blue" href="#contact">Get In Touch ↗</a>
+        <a class="btn-outline" href="#experience">View My Work</a>
+      </div>
+</div>
+
+    <!-- RIGHT — profile card -->
+    <div class="hero-card-col">
+      <div class="profile-card">
+        <div class="pc-label">Quick Profile</div>
+        <div class="pc-row">
+          <div class="pc-ico">📍</div>
+          <div><div class="pc-lbl">Location</div><div class="pc-val">Chennai, India</div></div>
+        </div>
+        <div class="pc-row">
+          <div class="pc-ico">🏢</div>
+          <div><div class="pc-lbl">Company</div><div class="pc-val">HCLTech</div></div>
+        </div>
+        <div class="pc-row">
+          <div class="pc-ico">⏱️</div>
+          <div><div class="pc-lbl">Experience</div><div class="pc-val">3 Yrs 5 Months</div></div>
+        </div>
+        <div class="pc-row">
+          <div class="pc-ico">📧</div>
+          <div><div class="pc-lbl">Email</div><div class="pc-val" style="font-size:.73rem">abisheknatarajan01@gmail.com</div></div>
+        </div>
+        <div class="pc-row">
+          <div class="pc-ico">📞</div>
+          <div><div class="pc-lbl">Phone</div><div class="pc-val">+91 6383635461</div></div>
+        </div>
+        <!-- LinkedIn -->
+        <a class="pc-row pc-social" href="https://linkedin.com/in/abishek-n/" target="_blank">
+          <div class="pc-ico" style="background:#0a66c2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div><div class="pc-lbl">LinkedIn</div><div class="pc-val">linkedin.com/in/abishek-n</div></div>
+        </a>
+        <!-- GitHub -->
+        <a class="pc-row pc-social" href="https://github.com/abishekn01" target="_blank">
+          <div class="pc-ico" style="background:#24292e">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </div>
+          <div><div class="pc-lbl">GitHub</div><div class="pc-val">github.com/abishekn01</div></div>
+        </a>
+      </div>
+    </div>
+
+    </div>
+</section>
+
+<hr class="divider"/>
+
+
+
+<!-- ═══════ 1 · ABOUT ═══════ -->
+<section class="section reveal" id="about">
+  <p class="s-eye"><span class="sec-num">1</span>About</p>
+  <h2 class="s-title">Who I <span>Am</span></h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm <strong style="color:var(--txtb)">Abishek N</strong>, a DevOps &amp; Cloud Engineer with a strong focus on AWS. Over 3+ years at HCLTech, I've grown from cloud operations into designing and owning full infrastructure automation pipelines across multiple production environments.</p>
+      <p>My core strength is bridging development speed with operational reliability — building CI/CD pipelines that deploy with confidence, infrastructure that provisions in minutes, and monitoring stacks that catch issues before users notice.</p>
+      <p>I care deeply about security: every pipeline I build includes vulnerability scanning, every AWS environment follows least-privilege IAM, and every deployment is repeatable and auditable through IaC.</p>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi"><div class="kpi-n">70%</div><div class="kpi-l">Faster infrastructure provisioning</div></div>
+      <div class="kpi"><div class="kpi-n">25%</div><div class="kpi-l">Reduction in deployment time</div></div>
+      <div class="kpi"><div class="kpi-n">$3K</div><div class="kpi-l">Monthly AWS cost saved</div></div>
+      <div class="kpi"><div class="kpi-n">45%</div><div class="kpi-l">Fewer critical vulnerabilities</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ═══════ 2 · EXPERIENCE ═══════ -->
+<section class="section reveal" id="experience">
+  <p class="s-eye"><span class="sec-num">2</span>Experience</p>
+  <h2 class="s-title">Work <span>History</span></h2>
+
+  <div class="exp-company-block">
+    <div class="exp-co-header">
+      <div class="exp-co-left">
+        <div class="exp-co-logo">🏢</div>
+        <div>
+          <div class="exp-co-name">HCLTech</div>
+          <div class="exp-co-meta">Chennai, India &nbsp;·&nbsp; Oct 2022 – Present &nbsp;·&nbsp; 3 Yrs 5 Months</div>
+        </div>
+      </div>
+      <span class="exp-co-badge">● Current Employer</span>
+    </div>
+
+    <!-- Role 1 -->
+    <div class="exp-role-block">
+      <div class="exp-role-top">
+        <div class="exp-role-line">
+          <span class="exp-role-name">DevOps &amp; Cloud Engineer</span>
+          <span class="exp-role-sep">–</span>
+          <span class="exp-role-sub">Software Engineer</span>
+        </div>
+        <span class="exp-date">Apr 2024 – Present</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Designed and implemented CI/CD pipelines using Jenkins, GitLab CI, GitHub Actions &amp; AWS CodeBuild — cut deployment time by 25%, enabling weekly production releases (previously monthly).</li>
+        <li>Architected AWS infrastructure with Terraform, CloudFormation &amp; Ansible — reduced provisioning time by 70% and ensured consistency across dev, test, and production environments.</li>
+        <li>Implemented multi-region infrastructure automation across 4 AWS regions, reducing manual errors by 15%.</li>
+        <li>Containerized applications with Docker and deployed to Kubernetes (EKS) — improved scalability and reduced peak-traffic downtime by 30%.</li>
+        <li>Integrated SonarQube, Trivy &amp; Maven into CI workflows — code quality up 35%, critical vulnerabilities down 45%.</li>
+        <li>Implemented least-privilege IAM, RBAC &amp; AWS Secrets Manager — resolved 100% of audit-flagged issues within a single release cycle.</li>
+        <li>Led AWS cost optimization achieving 75% savings (~$3,000/month) via EBS/RDS snapshot tuning, S3 archiving &amp; automated EC2/RDS scheduling.</li>
+      </ul>
+      <div class="exp-tags">
+        <span class="exp-tag">Terraform</span><span class="exp-tag">EKS</span>
+        <span class="exp-tag">Jenkins</span><span class="exp-tag">GitHub Actions</span>
+        <span class="exp-tag">Docker</span><span class="exp-tag">Helm</span>
+        <span class="exp-tag">IAM</span><span class="exp-tag">SonarQube</span><span class="exp-tag">Trivy</span>
+      </div>
+    </div>
+
+    <!-- Role 2 -->
+    <div class="exp-role-block">
+      <div class="exp-role-top">
+        <div class="exp-role-line">
+          <span class="exp-role-name">Graduate Engineer Trainee</span>
+        </div>
+        <span class="exp-date">Oct 2022 – Mar 2024</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Supported and administered AWS environments (EC2, VPC, S3, IAM, RDS) ensuring high availability and fault tolerance for production workloads.</li>
+        <li>Automated EC2 and RDS scheduling using AWS CloudFormation — reduced infrastructure costs by 10–15%.</li>
+        <li>Designed and managed secure VPC architectures including subnetting, routing tables, and security groups.</li>
+        <li>Configured CloudWatch metrics, logs, alerts &amp; dashboards — improved incident detection and reduced MTTR by 40%.</li>
+        <li>Managed data backup, restoration, and secure data transfers across AWS services.</li>
+      </ul>
+      <div class="exp-tags">
+        <span class="exp-tag">AWS EC2</span><span class="exp-tag">VPC</span>
+        <span class="exp-tag">S3</span><span class="exp-tag">CloudFormation</span>
+        <span class="exp-tag">CloudWatch</span><span class="exp-tag">RDS</span><span class="exp-tag">IAM</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ═══════ 3 · CERTIFICATIONS ═══════ -->
+<section class="section reveal" id="certifications">
+  <p class="s-eye"><span class="sec-num">3</span>Certifications</p>
+  <h2 class="s-title">Industry <span>Credentials</span></h2>
+  <div class="certs-grid">
+
+
+    <!-- AWS Cloud Practitioner -->
+    <a class="cert-card" href="https://www.credly.com/badges/37b8720c-6378-4a82-8089-3215e49d7347/linked_in_profile" target="_blank" title="View on Credly" style="text-decoration:none">
+      <img class="cert-img"
+        src="https://images.credly.com/size/340x340/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png"
+        alt="AWS Cloud Practitioner" onerror="this.style.display='none'"/>
+      <div style="flex:1">
+        <div class="cert-name">AWS Certified Cloud Practitioner</div>
+        <div class="cert-by">Amazon Web Services</div>
+        <div class="cert-ok">Issued Jul 2023 · Expires Jul 2026</div>
+        <div class="cert-open">↗ View on Credly</div>
+      </div>
+    </a>
+
+    <!-- AWS SAA -->
+    <div class="cert-card" title="Click to view certificate">
+      <img class="cert-img"
+        src="https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png"
+        alt="AWS SAA" onerror="this.style.display='none'"/>
+      <div style="flex:1">
+        <div class="cert-name">AWS Certified Solutions Architect – Associate</div>
+        <div class="cert-by">Amazon Web Services</div>
+        <div class="cert-ok">Certified</div>
+      </div>
+    </div>
+
+    <!-- HashiCorp Terraform — uses uploaded logo -->
+    <a class="cert-card" href="cert_az204.pdf" target="_blank" title="Click to view certificate" style="text-decoration:none">
+      <img class="cert-img" id="tf-logo-main" alt="Terraform Associate"/>
+      <div style="flex:1">
+        <div class="cert-name">HashiCorp Certified: Terraform Associate (003)</div>
+        <div class="cert-by">HashiCorp</div>
+        <div class="cert-ok">Certified</div>
+        <div class="cert-open">↗ View Certificate</div>
+      </div>
+    </a>
+
+    <!-- CKA -->
+    <div class="cert-card" title="Click to view certificate">
+      <img class="cert-img"
+        src="https://images.credly.com/size/340x340/images/8b8ed108-e77d-4396-ac59-2504583b9d54/cka_from_cncfsite__281_29.png"
+        alt="CKA" onerror="this.style.display='none'"/>
+      <div style="flex:1">
+        <div class="cert-name">Certified Kubernetes Administrator (CKA)</div>
+        <div class="cert-by">CNCF / The Linux Foundation</div>
+        <div class="cert-ok">Certified</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:2rem">
+    <p style="font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--txtd);margin-bottom:.8rem">Education</p>
+    <div class="edu-card">
+      <div class="edu-ico">🎓</div>
+      <div>
+        <div class="edu-deg">Bachelor of Engineering — Electrical &amp; Electronics</div>
+        <div class="edu-inst">Bannari Amman Institute of Technology, Sathyamangalam, Erode</div>
+        <div class="edu-yr">August 2018 – May 2022</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ═══════ 4 · SKILLS ═══════ -->
+<section class="section reveal" id="skills">
+  <p class="s-eye"><span class="sec-num">4</span>Skills &amp; Tools</p>
+  <h2 class="s-title">Tech <span>Stack</span></h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="sc-head"><div class="sc-ico">☁️</div><div class="sc-title">Cloud Platforms</div></div>
+      <div class="chip-wrap">
+        <span class="chip">AWS EC2</span><span class="chip">EKS</span><span class="chip">ECS</span>
+        <span class="chip">RDS</span><span class="chip">Lambda</span><span class="chip">S3</span>
+        <span class="chip">ELB</span><span class="chip">SNS</span><span class="chip">Route53</span>
+        <span class="chip">Google Cloud</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sc-head"><div class="sc-ico">🏗️</div><div class="sc-title">Infrastructure as Code</div></div>
+      <div class="chip-wrap">
+        <span class="chip">Terraform</span><span class="chip">CloudFormation</span>
+        <span class="chip">Ansible</span><span class="chip">Remote State S3</span>
+        <span class="chip">DynamoDB Locking</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sc-head"><div class="sc-ico">⚙️</div><div class="sc-title">CI/CD &amp; SCM</div></div>
+      <div class="chip-wrap">
+        <span class="chip">Jenkins</span><span class="chip">GitHub Actions</span>
+        <span class="chip">GitLab CI</span><span class="chip">AWS CodeBuild</span>
+        <span class="chip">ArgoCD</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sc-head"><div class="sc-ico">🐳</div><div class="sc-title">Containers &amp; Kubernetes</div></div>
+      <div class="chip-wrap">
+        <span class="chip">Docker</span><span class="chip">Kubernetes (EKS)</span>
+        <span class="chip">Helm</span><span class="chip">Blue-Green</span>
+        <span class="chip">Canary Releases</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sc-head"><div class="sc-ico">📊</div><div class="sc-title">Monitoring &amp; Logging</div></div>
+      <div class="chip-wrap">
+        <span class="chip">CloudWatch</span><span class="chip">Prometheus</span>
+        <span class="chip">Grafana</span><span class="chip">ELK Stack</span>
+        <span class="chip">Alerting</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sc-head"><div class="sc-ico">🔒</div><div class="sc-title">Security</div></div>
+      <div class="chip-wrap">
+        <span class="chip">IAM Least-Privilege</span><span class="chip">RBAC</span>
+        <span class="chip">Secrets Manager</span><span class="chip">Trivy</span>
+        <span class="chip">SonarQube</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sc-head"><div class="sc-ico">💻</div><div class="sc-title">Programming &amp; OS</div></div>
+      <div class="chip-wrap">
+        <span class="chip">Linux Admin</span><span class="chip">Bash</span>
+        <span class="chip">Python</span><span class="chip">YAML</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="sc-head"><div class="sc-ico">🛠️</div><div class="sc-title">Other Tools</div></div>
+      <div class="chip-wrap">
+        <span class="chip">Maven</span><span class="chip">Nexus</span>
+        <span class="chip">Gradle</span><span class="chip">Jira</span>
+        <span class="chip">Confluence</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ═══════ 5 · PROJECTS ═══════ -->
+<section class="section reveal" id="projects">
+  <p class="s-eye"><span class="sec-num">5</span>Projects</p>
+  <h2 class="s-title">Personal <span>Projects</span></h2>
+  <div class="proj-grid">
+    <div class="proj-card">
+      <div class="proj-head">
+        <div class="proj-ico">🚀</div>
+        <a class="proj-gh" href="https://github.com/abishekn01" target="_blank">↗ GitHub</a>
+      </div>
+      <div class="proj-name">Kubernetes Deployment Platform</div>
+      <div class="proj-desc">Built a secure automated CI/CD pipeline to deploy Dockerized applications on Amazon EKS using Jenkins, Helm, and ArgoCD. Implemented blue-green and canary deployment strategies for zero-downtime releases.</div>
+      <div class="proj-stack">
+        <span>Jenkins</span><span>ArgoCD</span><span>Docker</span>
+        <span>EKS</span><span>Helm</span><span>Blue-Green</span><span>Canary</span>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-head">
+        <div class="proj-ico">🏗️</div>
+        <a class="proj-gh" href="https://github.com/abishekn01" target="_blank">↗ GitHub</a>
+      </div>
+      <div class="proj-name">Cloud-Native AWS Infrastructure Automation</div>
+      <div class="proj-desc">Created modular Terraform templates for VPC, EC2, and EKS with remote state using S3 + DynamoDB locking. Implemented automated provisioning pipelines and IaC best practices for scalable AWS infrastructure.</div>
+      <div class="proj-stack">
+        <span>Terraform</span><span>VPC</span><span>EC2</span>
+        <span>EKS</span><span>S3</span><span>DynamoDB</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ═══════ 6 · TRAINING & COURSES ═══════ -->
+<section class="section reveal" id="training">
+  <p class="s-eye"><span class="sec-num">6</span>Training &amp; Courses</p>
+  <h2 class="s-title">Learning <span>Journey</span></h2>
+
+  <p class="train-section-lbl">🏆 Official Course Completions — Koenig Solutions</p>
+  <div class="training-grid" style="margin-bottom:2.5rem">
+
+    <a class="train-card" href="cert_az104.pdf" target="_blank">
+      <div class="train-ico" style="background:#0078d4;border-color:#50a0e0">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg" alt="Azure"/>
+      </div>
+      <div style="flex:1">
+        <div class="train-name">AZ-104T00-A: Microsoft Azure Administrator</div>
+        <div class="train-plat">Koenig Solutions · Microsoft Solutions Partner</div>
+        <div class="train-date">✓ Completed: 7 December 2023</div>
+        <div class="train-id">CNO-196548</div>
+        <div class="train-open">↗ View Certificate</div>
+      </div>
+    </a>
+
+    <a class="train-card" href="cert_az204.pdf" target="_blank">
+      <div class="train-ico" style="background:#0078d4;border-color:#50a0e0">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg" alt="Azure"/>
+      </div>
+      <div style="flex:1">
+        <div class="train-name">AZ-204T00: Developing Solutions for Microsoft Azure</div>
+        <div class="train-plat">Koenig Solutions · Microsoft Solutions Partner</div>
+        <div class="train-date">✓ Completed: 23 February 2024</div>
+        <div class="train-id">CNO-210791</div>
+        <div class="train-open">↗ View Certificate</div>
+      </div>
+    </a>
+
+    <a class="train-card" href="cert_devops.pdf" target="_blank">
+      <div class="train-ico" style="background:#232f3e;border-color:#ff9900">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS"/>
+      </div>
+      <div style="flex:1">
+        <div class="train-name">AWS Certified DevOps Engineer – Professional</div>
+        <div class="train-plat">Koenig Solutions · AWS Training Partner</div>
+        <div class="train-date">✓ Completed: 30 August 2024</div>
+        <div class="train-id">CNO-273086</div>
+        <div class="train-open">↗ View Certificate</div>
+      </div>
+    </a>
+
+    <a class="train-card" href="cert_github.pdf" target="_blank">
+      <div class="train-ico" style="background:#24292e;border-color:#555">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" style="filter:invert(1)"/>
+      </div>
+      <div style="flex:1">
+        <div class="train-name">GH-200: Automate Your Workflow with GitHub Actions</div>
+        <div class="train-plat">Koenig Solutions · Microsoft Solutions Partner</div>
+        <div class="train-date">✓ Completed: 23 February 2026</div>
+        <div class="train-id">CNO-460830</div>
+        <div class="train-open">↗ View Certificate</div>
+      </div>
+    </a>
+
+  </div>
+
+
+  <!-- Google Skill Boost -->
+  <p class="train-section-lbl" style="margin-top:2rem">🎓 Google Cloud Skills Boost</p>
+  <div class="training-grid" style="margin-bottom:2.5rem">
+
+    <a class="train-card" href="https://www.skills.google/public_profiles/8ccaf4de-cead-4d40-b176-2fe58dcde64d" target="_blank">
+      <div class="train-ico" style="background:#fff;border-color:#4285f4;padding:5px">
+        <svg viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      </div>
+      <div style="flex:1">
+        <div class="train-name">Google Cloud Skills Boost</div>
+        <div class="train-plat">Personal Profile · Google Cloud</div>
+        <div class="train-date">Badges &amp; Learning Path</div>
+        <div class="train-open">↗ View Personal Profile</div>
+      </div>
+    </a>
+
+    <a class="train-card" href="https://partner.skills.google/public_profiles/e4b3871a-3fd6-4a40-9efe-566ebee01760" target="_blank">
+      <div class="train-ico" style="background:#fff;border-color:#34a853;padding:5px">
+        <svg viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      </div>
+      <div style="flex:1">
+        <div class="train-name">Google Cloud Skills Boost</div>
+        <div class="train-plat">Organisational Profile · Google Cloud Partner</div>
+        <div class="train-date">Partner Badges &amp; Achievements</div>
+        <div class="train-open">↗ View Organisational Profile</div>
+      </div>
+    </a>
+
+
+    <a class="train-card" href="https://learn.microsoft.com/en-us/users/abishekn01/" target="_blank">
+      <div class="train-ico" style="background:#0078d4;border-color:#50a0e0;padding:5px">
+        <svg viewBox="0 0 23 23" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="10" height="10" fill="#f25022"/>
+          <rect x="12" y="1" width="10" height="10" fill="#7fba00"/>
+          <rect x="1" y="12" width="10" height="10" fill="#00a4ef"/>
+          <rect x="12" y="12" width="10" height="10" fill="#ffb900"/>
+        </svg>
+      </div>
+      <div style="flex:1">
+        <div class="train-name">Microsoft Learn</div>
+        <div class="train-plat">Microsoft · Official Learning Platform</div>
+        <div class="train-date">Modules, Paths &amp; Achievements</div>
+        <div class="train-open">↗ View Microsoft Learn Profile</div>
+      </div>
+    </a>
+
+  </div>
+
+  <p class="train-section-lbl">📚 Certification Preparation Courses</p>
+  <div class="training-grid">
+
+    <div class="train-card">
+      <div class="train-ico" style="background:#232f3e;border-color:#ff9900">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS"/>
+      </div>
+      <div>
+        <div class="train-name">AWS Certified Solutions Architect – Associate (SAA-C03)</div>
+        <div class="train-plat">Udemy · Certification Prep</div>
+        <div class="train-date">Exam Prep Course</div>
+      </div>
+    </div>
+
+    <div class="train-card">
+      <div class="train-ico" style="background:#1a0a2e;border-color:#7b42bc">
+        <img id="tf-logo-train" alt="HashiCorp Terraform"/>
+      </div>
+      <div>
+        <div class="train-name">HashiCorp Certified: Terraform Associate (003)</div>
+        <div class="train-plat">Udemy · Certification Prep</div>
+        <div class="train-date">Exam Prep Course</div>
+      </div>
+    </div>
+
+    <div class="train-card">
+      <div class="train-ico" style="background:#326ce5;border-color:#5090ff">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Kubernetes_logo_without_workmark.svg" alt="Kubernetes"/>
+      </div>
+      <div>
+        <div class="train-name">Certified Kubernetes Administrator (CKA) with Practice Tests</div>
+        <div class="train-plat">Udemy · KodeKloud · Hands-on Labs</div>
+        <div class="train-date">Exam Prep Course</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ═══════ CONTACT ═══════ -->
+<section class="section reveal" id="contact">
+  <p class="s-eye" style="text-align:center">Contact</p>
+  <h2 class="s-title" style="text-align:center">Let's Build <span>Together</span></h2>
+  <div style="display:flex;justify-content:center">
+    <div class="contact-box">
+      <div class="contact-lead">Get In Touch</div>
+      <p class="contact-sub">Open to new opportunities, cloud architecture discussions, and interesting infrastructure challenges. I typically respond within 24 hours.</p>
+      <a class="contact-email" href="mailto:abisheknatarajan01@gmail.com">✉ abisheknatarajan01@gmail.com</a>
+      <div class="contact-links">
+        <a class="cl" href="https://linkedin.com/in/abishek-n/" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a class="cl" href="https://github.com/abishekn01" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a class="cl" href="tel:+916383635461">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.14 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.05 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 17z"/></svg>
+          +91 6383635461
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div><b>Abishek N</b> — DevOps &amp; Cloud Engineer</div>
+  <div>Chennai, India</div>
+  <div>© 2026 · Abishek N</div>
+</footer>
+
+<script>
+
+// Inject Terraform logo everywhere
+const TF_LOGO = 'data:image/png;base64,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';
+['tf-logo-main','tf-logo-card','tf-logo-train','tf-logo-hero'].forEach(id => {
+  const el = document.getElementById(id);
+  if(el) el.src = TF_LOGO;
+});
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+const secs = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if(scrollY >= s.offsetTop - 80) cur = s.id; });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    const active = a.getAttribute('href') === '#' + cur;
+    a.style.color = active ? 'var(--blue-lt)' : '';
+    a.style.fontWeight = active ? '700' : '';
+  });
+});
+</script>
+</body>
+</html>
